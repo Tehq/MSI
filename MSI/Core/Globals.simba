@@ -109,6 +109,7 @@ const
   SCRIPT_SV_OAKS    = 25;
   SCRIPT_SV_TREES   = 26;
   SCRIPT_EV_YEWS    = 27;
+  SCRIPT_GE_TREES   = 128;
 
   // Mining
   SCRIPT_POWER_MINER = 30;
@@ -141,6 +142,7 @@ const
   // Magic
   SCRIPT_ALCHER     = 80;
   SCRIPT_TELEPORTER = 81;
+  SCRIPT_SUPEREHEAT = 129;
 
   // Money Making
   SCRIPT_VE_SOFTENER = 100;
@@ -159,7 +161,7 @@ const
   SCRIPT_RC_BODY  = 124;
   SCRIPT_RC_MIND  = 125;
 
-  SCRIPT_ARRAY_LENGTH = 127; // Change to the highest script constant
+  SCRIPT_ARRAY_LENGTH = 129; // Change to the highest script constant
 
 (*
 Extras Constants
@@ -333,8 +335,11 @@ const
   // Fishing Colony(Piscatoris)
   LOC_FC_BANK = 158;
   LOC_FC_FISH = 159;
+ 
+  // Soul Wars
+  LOC_SW  = 160;
 
-  LOC_ARRAY_LENGTH = 159; // Change to the highest location constant
+  LOC_ARRAY_LENGTH = 160; // Change to the highest location constant
 
 (*
 Requirement Constants
@@ -558,6 +563,7 @@ const
   MSI_BANK_FW = 39;
   MSI_BANK_FG = 40;
   MSI_BANK_Y  = 41;
+  MSI_BANK_SW = 42;
 
   DBOX_PS = 45;
 
@@ -742,6 +748,7 @@ const
   ANIM_CHOPPING     = 12;
   ANIM_CHOPPING_NEW = 13;
   ANIM_TELE         = 14;
+  ANIM_SUPERHEAT    = 15;
 
 (*
 Material Constants
