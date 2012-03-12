@@ -611,6 +611,40 @@ begin
         end;
       end;
 
+     SCRIPT_GE_TREES:
+      with MSI_Scripts[whichScript] do
+      begin
+        Name          := 'Grand Exchange Trees';
+        Constant      := SCRIPT_GE_TREES;
+        SkillName     := 'Woodcutting';
+        SkillConst    := SKILL_WOODCUTTING;
+        BankType      := Bank;
+        WhichBank     := MSI_BANK_VW;
+        AdjustCamera  := True;
+        AutoObjects   := @MSI_ChopInvFull;
+        BankObjects   := @MSI_BankStandard;
+        PlayerSetup   := @MSI_SetupWoodcutting;
+
+        Defaults.Trees := [TREE_NORMAL_NEW, TREE_OAK_NEW];
+
+        with PathInfo do
+        begin
+          Name := 'LOC_VW_BANK to LOC_GE_TREES';
+          StartLoc := LOC_VW_BANK;
+          EndLoc   := LOC_GE_TREES;
+
+          SPSPath := [
+            TPointArray([Point(4580, 2889), Point(4582, 2857), Point(4542, 2845),
+                         Point(4508, 2824), Point(4463, 2833)])
+          ];
+
+          SPSAreas   := [
+            TStringArray(['11_6', '11_7'])
+          ];
+        end;
+      end;
+
+
     { MINERS ===================================== ]
     [============================================= }
     SCRIPT_POWER_MINER:
@@ -955,7 +989,6 @@ begin
             // Ladder Up -> In Mine
             TPointArray([Point(279, 507), Point(356, 499)])
           ];
-
           SPSSurfaces := [RUNESCAPE_SURFACE, DWARVEN_MINE];
           SPSAreas    := [TStringArray(['9_7', '9_8']), TStringArray(['0_1'])];
 
@@ -1382,6 +1415,47 @@ begin
           Spells := [SPELL_TELE_HOME, SPELL_TELE_VARROCK, SPELL_TELE_LUMBRIDGE,
                     SPELL_TELE_FALADOR, SPELL_TELE_HOUSE, SPELL_TELE_CAMELOT];
           StaffType := LeastCasts;
+        end;
+      end;
+
+    SCRIPT_SUPERHEATER:
+      with MSI_Scripts[whichScript] do
+      begin
+        Name          := 'Superheater';
+        Constant      := SCRIPT_SUPERHEATER;
+        SkillName     := 'Magic';
+        SkillConst    := SKILL_MAGIC;
+        BankType      := Bank;
+        WhichBank     := MSI_BANK_SW;
+        GetMaterials  := True;
+        AutoObjects   := @MSI_DoMagic;
+        PlayerSetup   := @MSI_SetupMagic;
+
+        with Defaults do
+        begin
+          Spells := [SPELL_SUPERHEAT];
+          StaffType := LeastCasts;
+          Materials := [ORE_COPPER, ORE_TIN,
+                        ORE_IRON, ORE_SILVER,
+                        ORE_COAL, ORE_GOLD,
+                        ORE_MITHRIL, ORE_ADAMANTITE,
+                        ORE_RUNITE
+          ];
+        end;
+
+        with PathInfo do
+        begin
+          Name := 'LOC_SW to LOC_SW';
+          StartLoc := LOC_SW;
+          EndLoc   := LOC_SW;
+
+          SPSPath := [
+            TPointArray([Point(686, 5247), Point(692, 5246)])
+          ];
+
+          SPSAreas   := [
+            TStringArray(['1_13'])
+          ];
         end;
       end;
 
@@ -1890,7 +1964,6 @@ begin
           obstacles[OBS_LOC_FROM] := [OBS_PORTAL_BODY];
         end;
       end;
-
 
   end; // big case
 
