@@ -237,6 +237,23 @@ begin
          end;
        end;
 
+     LOC_GE_Trees:
+       with MSI_Locations[loc] do
+       begin
+         name := 'Grand Exchange Trees';
+         atBank := false;
+
+         setLength(subLocs, 1);
+         with subLocs[0] do
+         begin
+           name := 'Grand Exchange Trees';
+           spsBox := intToBox(4447, 2821, 4472, 2845);
+           compass := randomRange(250, 280);
+           subLocs[i].camera := SRL_ANGLE_LOW;
+           objects := MSI_Scripts[SCRIPT_GE_TREES].Defaults.Trees;
+         end;
+       end;
+
      LOC_GE_BANK:
        with MSI_Locations[loc] do
        begin
@@ -1439,6 +1456,49 @@ begin
         end;
       end;
 
+     LOC_SW:
+       with MSI_Locations[loc] do
+       begin
+         name := 'Soul Wars';
+         atBank := true;
+
+         setLength(subLocs, 1);
+         with subLocs[0] do
+         begin
+           name := 'In Soul Wars';
+           spsBox := intToBox(660, 5229, 706, 5253);          //or last walk point?
+         end;
+
+         with deathPath do
+         begin
+           name := 'LOC_LB_SPAWN to LOC_SW';
+           startLoc := LOC_LB_SPAWN;
+           endLoc := LOC_SW;
+
+           spsPath := [
+             TPointArray([Point(4775, 3785), Point(4756, 3730),
+                          Point(4729, 3680), Point(4709, 3628),
+                          Point(4702, 3575), Point(4653, 3545),
+                          Point(4602, 3533), Point(4548, 3518),
+                          Point(4489, 3505), Point(4437, 3479),
+                          Point(4376, 3466), Point(4321, 3439),
+                          Point(4271, 3418), Point(4218, 3401),
+                          Point(4178, 3361), Point(4147, 3319),
+                          Point(4128, 3261), Point(4126, 3202),
+                          Point(4130, 3138), Point(4165, 3084),
+                          Point(4201, 3035), Point(4233, 2977),
+                          Point(4236, 2913), Point(4229, 2859),
+                          Point(4206, 2816), Point(4211, 2765),
+                          Point(4165, 2751)                        //this
+                          ])
+           ];
+
+           spsAreas   := [
+             TStringArray(['11_9','11_8','10_8','10_7','10_6'])
+           ];
+         end;
+       end;
+
   end;
 
   with MSI_Locations[loc] do
@@ -1817,4 +1877,3 @@ begin
 
   MSI_CloseHeader('MSI_AtLocation: ' + boolToStr(result));
 end;
-
