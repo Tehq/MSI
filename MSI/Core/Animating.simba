@@ -111,6 +111,18 @@ begin
         MaxTime := 250;
         WaitTime := 1000;
       end;
+
+    ANIM_SUPERHEAT:
+      with Result do
+      begin
+        Name := 'Superheating';
+        MinPixelShift := 250;          //need to find min/max
+        MaxPixelShift := 2300;
+        PixelBox := IntToBox(PLBX1-15, PLBY1-45, PLBX2+15, PLBY2);
+        Interval := 50;
+        MaxTime := 100;
+        WaitTime := 200;
+      end;
   end;
 end;
 
@@ -211,5 +223,4 @@ begin
     end;
   end;
 end;
-
 
