@@ -94,14 +94,14 @@ begin
       begin
         Name               := 'TREE_NORMAL_NEW';
         Uptexts            := ['ree'];
-        Options            := ['own Tree'];
+        Options            := ['own T'];
         Level              := 1;
-        Colors             := [3361629];
-        Tol                := 6;
-        Hue                := [0.11];
-        Sat                := [0.27];
+        Colors             := [3162440];
+        Tol                := 7;
+        Hue                := [0.13];
+        Sat                := [0.37];
         FindAllColors      := False;
-        W                  := 30;
+        W                  := 60;
         H                  := 60;
         Accuracy           := 30;
         SearchArea         := MSBox;
@@ -410,6 +410,7 @@ begin
         Accuracy           := 10;
         SearchArea         := IntToBox(MSX1, MSY1, MSX2, MSCY);
         ExcludeSelf        := True;
+        RightClickOnly     := True;
         WaitToMove         := True;
         MultiClick         := True;
       end;
@@ -599,6 +600,27 @@ begin
         SearchArea         := MSBox
         ExcludeSelf        := True;
         RightClickOnly     := False;
+        WaitToMove         := True;
+        MultiClick         := True;
+      end;
+
+     MSI_BANK_SW:
+      with result do
+      begin
+        Name               := 'BANK_SW';
+        Uptexts            := ['ank c'];
+        Options            := ['ank'];
+        Colors             := [5592665];             //colors need work
+        Tol                := 6;
+        Hue                := [0.07];
+        Sat                := [0.98];
+        FindAllColors      := False;
+        W                  := 30;
+        H                  := 20;
+        Accuracy           := 7;
+        SearchArea         := MSBox
+        ExcludeSelf        := True;
+        RightClickOnly     := True;
         WaitToMove         := True;
         MultiClick         := True;
       end;
