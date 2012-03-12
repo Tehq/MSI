@@ -487,13 +487,14 @@ const
     LIST_COOKSPOTS = 7;
     LIST_OBJECTS   = 8;
 
-  EDIT_COUNT = 6;
+  EDIT_COUNT = 7;
     EDIT_LOADS      = 0;
     EDIT_TIME       = 1;
     EDIT_LEVEL      = 2;
     EDIT_EXCEPTIONS = 3;
     EDIT_ALCH_SLOTS = 4;
-    EDIT_PRIORITY   = 5;
+    EDIT_PRIORITY   = 6;
+    EDIT_HEAT_SLOTS = 5;
 
   COMBO_COUNT = 1;
     COMBO_COALBAG = 0;
@@ -649,6 +650,12 @@ begin
               edits := [EDIT_TIME, EDIT_LEVEL, EDIT_ALCH_SLOTS]
             else
               Edits := [EDIT_TIME, EDIT_LEVEL];
+
+             if (MSI_Scripts[i].Constant = SCRIPT_SUPERHEATER) then
+              edits := [EDIT_TIME, EDIT_LEVEL, EDIT_HEAT_SLOTS]
+            else
+              Edits := [EDIT_TIME, EDIT_LEVEL];
+
           end;
 
         SKILL_RUNECRAFTING:
@@ -794,6 +801,9 @@ begin
 
           // Fill the AlchSlots edit
           script_Edits[EDIT_ALCH_SLOTS].Text := IntArrToStr(MSI_Players[pIndex].Scripts[sIndex].AlchSlots);
+
+          // Fill the HeatSlots edit
+          script_Edits[EDIT_HEAT_SLOTS].Text := IntArrToStr(MSI_Players[pIndex].Scripts[sIndex].HeatSlots);
         end;
       end;
   end;
@@ -945,7 +955,7 @@ begin
             ShowMessage('Invalid max level! Please enter a number.')
           else
             MaxLevel := StrToInt(script_Edits[EDIT_LEVEL].Text);
-        
+
           try
             CoalBag := StrToBool(script_combos[COMBO_COALBAG].text);
           except
@@ -1049,6 +1059,9 @@ begin
 
         // Set the Alching Slots
         MSI_Players[pIndex].Scripts[sIndex].AlchSlots := StrToIntArr(script_Edits[EDIT_ALCH_SLOTS].Text);
+
+         // Set the Heating Slots
+        MSI_Players[pIndex].Scripts[sIndex].HeatSlots := StrToIntArr(script_Edits[EDIT_HEAT_SLOTS].Text);
 
         if (StrToIntDef(script_Edits[EDIT_LEVEL].Text, -1) = -1) then
           ShowMessage('Invalid max level! Please enter a number.')
@@ -1236,6 +1249,11 @@ begin
             Hint := 'All the inventory slots that contain items you want to Alch (i.e. 1,2,3,4)';
           end;
 
+        EDIT_HEAT_SLOTS:
+          begin
+            Hint := 'All the inventory slots that contain items you want to Heat (i.e. 1,2,3,4)';
+          end;
+
         EDIT_PRIORITY:
           begin
             Hint := 'You can set MSI to search for one object more than another. '+#10+
@@ -1251,7 +1269,7 @@ begin
   end;
 
   // Edit TLabels
-  script_EditTexts := ['Loads', 'Time', 'Level', 'Exceptions', 'Alching Slots', 'Priority'];
+  script_EditTexts := ['Loads', 'Time', 'Level', 'Exceptions', 'Alching Slots', 'Heating Slots', 'Priority'];
   for i := 0 to High(script_EditLabels) do
   begin
     script_EditLabels[i] := TLabel.Create(script_Form);
@@ -1588,6 +1606,10 @@ begin
               // AlchSlots
               if (Length(Scripts[j].AlchSlots) > 0) then
                 WriteINI(IntToStr(i), 'Script'+IntToStr(j)+'.AlchSlots', IntArrToStr(Scripts[j].AlchSlots), PATH_PLAYER);
+
+              // HeatSlots
+              if (Length(Scripts[j].HeatSlots) > 0) then
+                WriteINI(IntToStr(i), 'Script'+IntToStr(j)+'.HeatSlots', IntArrToStr(Scripts[j].HeatSlots), PATH_PLAYER);
             end;
         end;
       end;
@@ -2803,4 +2825,3 @@ begin
   script_Form.Free;
   MainForm.Free;
 end;
-
